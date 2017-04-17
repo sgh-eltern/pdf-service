@@ -10,7 +10,8 @@
   - removePrintMedia - Removes any <link media="print"> stylesheets on page before render. (default: false)
   - delay - Specify how many seconds to wait before generating the PDF (default: 0)
   - waitForText - Specify a specific string of text to find before generating the PDF (default: false)
-* deploy to DO or via cloud.docker.com/app/sghakinternet/
+* start page should show whitelisted domains
+* 401 page (no or wrong password) should show some text why auth is required
 * some real tests with missing params etc.
 * async: return with handle; download in background, provide link to regular http download
 * Concurrency?

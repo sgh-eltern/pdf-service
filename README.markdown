@@ -4,7 +4,13 @@ This is basically an instance of MediaWiki's [electron-render](https://github.co
 
 ## Deployment
 
-```
-$ eval "$(docker-machine env production)"
-$ docker-compose up -d
-```
+* to a docker-machine named `production`:
+
+  ```
+  $ eval "$(docker-machine env production)"
+  $ docker-compose up -d
+  ```
+
+* via docker-cloud:
+
+  The stack is defined in `docker-cloud.yml`. Just change the access key `t0ps3cret` to something other than the default. Make sure you update it in both places within the file.
