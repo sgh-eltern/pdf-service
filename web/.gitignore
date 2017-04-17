@@ -1,0 +1,9 @@
+.bundle
+.byebug_history
+.cache_rake_t
+.envrc
+deployment/*.retry
+docker-compose.yml
+docker-stages.yml
+docker.yml
+vendor/
