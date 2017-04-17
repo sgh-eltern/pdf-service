@@ -1,8 +1,8 @@
 version: '2'
 services:
   web:
-    build: web
-    image: sgh-eltern/pdf-service-web
+    build: .
+    image: sgh-eltern/pdf-service
     restart: unless-stopped
     links:
       - electron-renderer
