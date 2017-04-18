@@ -9,7 +9,17 @@
   </head>
 
   <body>
+    <header>
+      <a href="/" class="button">Home</a>
+      <a href="/about" class="button">Über...</a>
+    </header>
+
     <h1><%= title %></h1>
 
     <%= yield %>
+
+    <footer>
+      <p>&copy; <%= Time.now.year %> <a href="http://www.eltern-sgh.de/arbeitskreise/ak-internet/">Arbeitskreis Internet</a> des <a href="http://eltern-sgh.de">Elternbeirats SGH</a></p>
+    </footer>
+  </body>
 </html>
