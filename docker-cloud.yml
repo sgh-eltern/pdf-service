@@ -7,9 +7,12 @@ web:
   ports:
     - '80:9292'
   restart: on-failure
+  autoredeploy: true
+
 electron-renderer:
   environment:
     - HOSTNAME=0.0.0.0
     - RENDERER_ACCESS_KEY=t0ps3cret
   image: 'msokk/electron-render-service:latest'
   restart: on-failure
+  autoredeploy: true
