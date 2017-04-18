@@ -10,6 +10,8 @@
              placeholder="e.g. http://www.example.com"
       >
     </div>
+
+    <p><small>Erlaubte domains: <%= ALLOWED_HOSTS.join(', ') %></small></p>
   </fieldset>
   <input type="submit" class="primary" value=" Los ">
   <input type="reset" class="secondary" value="Reset">
