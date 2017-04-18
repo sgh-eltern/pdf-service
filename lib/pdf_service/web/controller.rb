@@ -12,31 +12,47 @@ module PdfService
       set :views, settings.root + '/views'
       helpers Sinatra::Streaming
 
+      configure :production, :development do
+        enable :logging
+      end
+
       ALLOWED_HOSTS = ['eltern-sgh.de', 'geb-herrenberg.de', 'freunde-sgh.de',].freeze
 
       get '/' do
         url = URI(params[:url] || '')
+        logger.info "Starting with #{url}"
 
         erb :index, layout: true, locals: {
-          title: 'Hello',
+          title: 'PDF-Service',
           url: url,
         }
       end
 
       post '/' do
-        protected! unless whitelisted(params[:url])
+        url_to_print = params[:url]
+        halt 422, "Error: Mandatory parameter 'url' is missing" if url_to_print.empty?
+        protected! unless whitelisted(url_to_print)
 
-        uri = URI("http://electron-renderer:3000/pdf?accessKey=#{ENV.fetch('RENDERER_ACCESS_KEY')}&url=#{params[:url]}")
         content_type 'application/pdf'
 
-        stream do |out|
-          Net::HTTP.get_response(uri) do |res|
-            res.read_body do |segment|
-              out << segment
-              warn "#{uri}: #{out.pos} bytes written"
+        stream do |out_stream|
+          renderer_url = renderer_url(url_to_print)
+          logger.info "Rendering #{renderer_url}"
+
+          Net::HTTP.get_response(renderer_url) do |renderer_response|
+            logger.info "Renderer response code: #{renderer_response.code}"
+
+            renderer_response.read_body do |segment|
+              out_stream << segment
+              logger.info "bytes written: #{out_stream.pos}"
             end
           end
         end
+      end
+
+      def renderer_url(url_to_print)
+        renderer_host = ENV.fetch('RENDERER_HOST', 'electron-renderer')
+        URI("http://#{renderer_host}:3000/pdf?accessKey=#{ENV.fetch('RENDERER_ACCESS_KEY')}&url=#{url_to_print}")
       end
 
       def whitelisted(url)
