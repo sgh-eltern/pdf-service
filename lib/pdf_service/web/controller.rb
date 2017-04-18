@@ -39,20 +39,6 @@ module PdfService
         end
       end
 
-      # async
-      # post '/' do
-      #   status 201
-      #   job_id = SecureRandom.uuid
-      #   redirect to("/status/#{job_id}")
-      # end
-      #
-      # get %r{/status/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})} do |job_id|
-      #   erb :status, layout: true, locals: {
-      #     title: "Status for #{job_id}",
-      #     status: 'submitted',
-      #   }
-      # end
-
       def whitelisted(url)
         hostname_tld = URI(url).host.split('.')[-2..-1].join('.')
         ALLOWED_HOSTS.include?(hostname_tld)
