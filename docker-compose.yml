@@ -10,6 +10,7 @@ services:
       - 9292:9292
     environment:
       - RENDERER_ACCESS_KEY
+      - RENDERER_HOST
   electron-renderer:
     image: msokk/electron-render-service
     restart: unless-stopped
