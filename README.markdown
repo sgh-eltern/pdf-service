@@ -21,6 +21,8 @@ export RENDERER_ACCESS_KEY=t0ps3cret
 rerun bundle exec rackup
 ```
 
+If you have [tmuxinator](https://github.com/tmuxinator/tmuxinator) installed (`gem install tmuxinator`), a simple call to `tmuxinator` will launch the service locally as well as the docker images using `docker-compose`. Have a look at the `.tmuxinator.yml` file to see what will be launched.
+
 # Deployment
 
 The stack is defined in `docker-cloud.yml`. Just change the access key `t0ps3cret` to something other than the default. Make sure you update it in both places within the file.
