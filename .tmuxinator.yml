@@ -1,0 +1,12 @@
+name: <%= File.basename(Dir.pwd) %>
+windows:
+  - docker:
+      pre: eval "$(docker-machine env default)"
+      panes:
+        - docker-compose up web
+        - docker-compose up electron-renderer
+  - ruby:
+      panes:
+        - bundle exec guard
+        - rerun bundle exec rackup
+        -
