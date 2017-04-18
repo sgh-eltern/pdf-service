@@ -2,14 +2,16 @@
 
 require 'sinatra/base'
 require 'sinatra/streaming'
-require 'uri'
-require 'net/http'
+
+require 'pdf_service/streaming_client'
 
 module PdfService
   module Web
     class Controller < Sinatra::Base
       set :root, File.join(File.dirname(__FILE__), '..', '..', '..')
       set :views, settings.root + '/views'
+      set :render_service, StreamingClient.new
+
       helpers Sinatra::Streaming
 
       configure :production, :development do
@@ -36,23 +38,11 @@ module PdfService
         content_type 'application/pdf'
 
         stream do |out_stream|
-          renderer_url = renderer_url(url_to_print)
-          logger.info "Rendering #{renderer_url}"
-
-          Net::HTTP.get_response(renderer_url) do |renderer_response|
-            logger.info "Renderer response code: #{renderer_response.code}"
-
-            renderer_response.read_body do |segment|
-              out_stream << segment
-              logger.info "bytes written: #{out_stream.pos}"
-            end
+          settings.render_service.stream(url_to_print) do |segment|
+            out_stream << segment
+            logger.info "bytes written: #{out_stream.pos}"
           end
         end
-      end
-
-      def renderer_url(url_to_print)
-        renderer_host = ENV.fetch('RENDERER_HOST', 'electron-renderer')
-        URI("http://#{renderer_host}:3000/pdf?accessKey=#{ENV.fetch('RENDERER_ACCESS_KEY')}&url=#{url_to_print}")
       end
 
       def whitelisted(url)
