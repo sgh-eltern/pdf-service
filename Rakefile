@@ -7,7 +7,7 @@ task default: ['spec:ci']
 
 namespace :spec do
   desc 'Run ci tests'
-  task ci: ['rubocop:auto_correct', :system]
+  task ci: ['rubocop:auto_correct', :unit]
 
   %w[unit system acceptance].each do |type|
     desc "Run #{type} tests"
