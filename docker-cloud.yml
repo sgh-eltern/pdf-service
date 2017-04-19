@@ -8,8 +8,6 @@ web:
   ports:
     - '80:9292'
   restart: on-failure
-  tags:
-    - sgh
 
 electron-renderer:
   autoredeploy: true
@@ -18,5 +16,3 @@ electron-renderer:
     - RENDERER_ACCESS_KEY=t0ps3cret
   image: 'msokk/electron-render-service:latest'
   restart: on-failure
-  tags:
-    - sgh

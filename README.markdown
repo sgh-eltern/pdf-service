@@ -71,7 +71,7 @@ docker-cloud nodecluster create sandbox digitalocean fra1 1gb
 1. Start the stack for the first time:
 
   ```bash
-  docker-cloud stack up -f docker-cloud.yml
+  docker-cloud up --name pdf-service --file docker-cloud.yml
   ```
 
   Subsequent deployments, even to different nodes, will be a simple re-deploy:
