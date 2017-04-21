@@ -6,16 +6,13 @@ services:
     restart: unless-stopped
     links:
       - electron-renderer
-    ports:
-      - 9292:9292
     environment:
       - RENDERER_ACCESS_KEY
       - RENDERER_HOST
+      - VIRTUAL_HOST
   electron-renderer:
     image: msokk/electron-render-service
     restart: unless-stopped
-    ports:
-      - 3000:3000
     environment:
       - RENDERER_ACCESS_KEY
       - HOSTNAME=0.0.0.0
