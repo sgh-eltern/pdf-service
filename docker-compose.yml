@@ -1,10 +1,12 @@
-version: '2'
+version: '3'
 services:
   web:
     build: .
     image: sgh-eltern/pdf-service
     restart: unless-stopped
-    links:
+    ports:
+      - "9292:9292"
+    depends_on:
       - electron-renderer
     environment:
       - RENDERER_ACCESS_KEY

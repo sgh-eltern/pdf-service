@@ -3,18 +3,7 @@
 require 'rspec/core/rake_task'
 require 'rubocop/rake_task'
 
-task default: ['spec:ci']
+task default: %w[rubocop spec]
 
-namespace :spec do
-  desc 'Run ci tests'
-  task ci: ['rubocop:auto_correct', :unit]
-
-  %w[unit system acceptance].each do |type|
-    desc "Run #{type} tests"
-    RSpec::Core::RakeTask.new(type) do |t|
-      t.pattern = "spec/#{type}/**/*_spec.rb"
-    end
-  end
-end
-
+RSpec::Core::RakeTask.new
 RuboCop::RakeTask.new
