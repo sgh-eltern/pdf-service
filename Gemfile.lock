@@ -61,6 +61,7 @@ GEM
     nenv (0.3.0)
     net-http-persistent (2.9.4)
     net-http-pipeline (1.0.1)
+    nio4r (2.5.2)
     notiffany (0.1.1)
       nenv (~> 0.1)
       shellany (~> 0.0)
@@ -73,7 +74,8 @@ GEM
     pry-byebug (3.8.0)
       byebug (~> 11.0)
       pry (~> 0.10)
-    puma (3.12.2)
+    puma (4.3.1)
+      nio4r (~> 2.0)
     pusher-client (0.6.2)
       json
       websocket (~> 1.0)
