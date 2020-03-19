@@ -45,7 +45,7 @@ GEM
     hashdiff (1.0.0)
     highline (1.7.10)
     jaro_winkler (1.5.2)
-    json (2.2.0)
+    json (2.3.0)
     launchy (2.4.3)
       addressable (~> 2.3)
     listen (3.1.5)
